@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notepad</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23d4652f'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia' font-size='16' fill='white'%3EN%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css?v=2.2">
+</head>
+<body>
+  <div class="app">
+    <aside>
+      <div class="brand">
+        <div class="brand-info">
+          <div class="brand-mark" aria-hidden="true">N</div>
+          <div>
+            <h1>Notepad</h1>
+            <p>Notes and code</p>
+          </div>
+        </div>
+        <button type="button" id="collapseSidebar" class="toggle-sidebar-btn" title="Collapse sidebar (Cmd B)" aria-label="Collapse sidebar">❮</button>
+      </div>
+      <div class="side-actions">
+        <button type="button" id="newWrite" class="btn" title="New note (Cmd N)">New note</button>
+        <button type="button" id="newCode" class="btn secondary" title="New code (Cmd Shift N)">New code</button>
+      </div>
+      <label class="search-label">
+        <span class="sr-only">Search notes</span>
+        <input id="search" type="search" placeholder="Search" autocomplete="off">
+      </label>
+      <div id="noteList" class="note-list" role="list"></div>
+      <div class="sync-box">
+        <p class="sync-title">Google Drive</p>
+        <p id="syncHelp" class="sync-help"></p>
+        <p id="fileLabel" class="file-label"></p>
+        <details id="driveSetup" class="drive-setup">
+          <summary>Google client ID</summary>
+          <p class="sync-help">One time, on both laptops. In Google Cloud, enable the Google Drive API. Create an OAuth client ID of type Web application. Add your Gmail as a test user. Authorized JavaScript origin: http://127.0.0.1:8765. Paste that client ID here.</p>
+          <input id="clientId" type="text" spellcheck="false" autocomplete="off" placeholder="xxxx.apps.googleusercontent.com" aria-label="Google client ID">
+          <button type="button" id="saveClientId" class="btn secondary small">Save client ID</button>
+        </details>
+        <div class="sync-actions">
+          <button type="button" id="googleSignIn" class="btn small">Sign in with Google</button>
+          <button type="button" id="driveSync" class="btn secondary small" hidden>Sync from Drive</button>
+          <button type="button" id="driveSave" class="btn small" hidden>Save to Drive</button>
+          <button type="button" id="googleSignOut" class="btn secondary small" hidden>Sign out</button>
+        </div>
+        <p class="sync-title">This laptop</p>
+        <p id="localLabel" class="sync-help"></p>
+        <div class="sync-actions">
+          <button type="button" id="saveFile" class="btn secondary small">Choose folder</button>
+          <button type="button" id="openFile" class="btn secondary small">Open file</button>
+        </div>
+        <p id="status" class="status">Sign in to save notes in Drive</p>
+      </div>
+    </aside>
+    <main>
+      <section id="empty" class="empty">
+        <h2>Start a note</h2>
+        <p>Write a note or code. Change the color, font, and background of the text.</p>
+        <div class="empty-actions">
+          <button type="button" id="emptyWrite" class="btn">New note</button>
+          <button type="button" id="emptyCode" class="btn ghost">New code</button>
+        </div>
+      </section>
+      <section id="workspace" class="workspace" hidden>
+        <div class="editor-head">
+          <div class="title-row">
+            <button type="button" id="expandSidebar" class="expand-sidebar-btn" title="Show sidebar (Cmd B)" aria-label="Show sidebar" hidden>☰</button>
+            <input id="title" type="text" placeholder="Title" autocomplete="off" aria-label="Title" spellcheck="true">
+            <p id="meta" class="meta"></p>
+          </div>
+          <div id="toolbar" class="toolbar"></div>
+        </div>
+        <div id="sheet" class="sheet">
+          <div id="placeholder" class="placeholder" hidden>Select words for a text background. Press Enter to leave that highlight or code and start a normal line. Click &lt;/&gt; again to remove code.</div>
+          <div id="editor" class="editor" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Note" spellcheck="true"></div>
+          <div id="codeShell" class="code-shell" hidden>
+            <pre id="codeHighlight" class="code-highlight" aria-hidden="true"></pre>
+            <textarea id="codeInput" class="code-input" aria-label="Code" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" wrap="off" placeholder="Write code here. Font, text color, and background apply to this note."></textarea>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="app.js?v=2.2"></script>
+</body>
+</html>
